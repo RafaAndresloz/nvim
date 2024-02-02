@@ -1,8 +1,7 @@
 --configuraciones
 
-   -- Número de espacios para la sangría automática
+-- Número de espacios para la sangría automática
 local opt = vim.opt
-
 
 -- Tab / Indentation
 opt.tabstop = 2
@@ -11,7 +10,6 @@ opt.softtabstop = 2
 opt.expandtab = true
 opt.smartindent = true
 opt.wrap = false
-
 
 -- Search
 opt.incsearch = true
@@ -23,7 +21,6 @@ opt.hlsearch = false
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true
-
 
 -- Behaviour
 opt.hidden = true
@@ -38,18 +35,24 @@ opt.splitbelow = true
 opt.autochdir = false
 opt.iskeyword:append("-")
 opt.selection = "exclusive"
+vim.api.nvim_set_option("guicursor", "n-v-c:block-Cursor/lCursor,i:ver25-iCursor/lCursor")
 opt.mouse = "a"
 opt.clipboard:append("unnamedplus")
 opt.modifiable = true
-opt.guicursor =
-	"n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 opt.encoding = "UTF-8"
 opt.showmode = false
+opt.smartindent = true -- Insert indents automatically
+opt.splitbelow = true -- Put new windows below current
+opt.splitkeep = "screen"
+opt.splitright = true -- Put new windows right of current
+opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.wrap = false -- Disable line wrap
 
 -- folds
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel = 99
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 -- Configuración global de transparencia
 vim.cmd([[ hi Normal guibg=NONE ctermbg=NONE ]])
 vim.cmd([[ hi SignColumn guibg=NONE ctermbg=NONE ]])
@@ -66,5 +69,3 @@ vim.cmd([[
     autocmd WinLeave * hi Normal guibg=NONE ctermbg=NONE
   augroup END
 ]])
-
-
