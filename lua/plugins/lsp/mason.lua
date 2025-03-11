@@ -20,5 +20,6 @@ return {
       automatic_installation = true, -- Instalar automáticamente los servidores que falten
     })
   end,
-}
+
+   }
 

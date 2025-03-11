@@ -9,7 +9,9 @@ return {
   require("plugins.vim-surround"),
   require("plugins.toggleterm"),
   require("plugins.bufferline"),
-   require("plugins.lualine"),
+  require("plugins.lualine"),
+  require("plugins.vim_multicursor"),
+  require("plugins.dashboard_nvim"),
   -- LSP CONFIGS
   require("plugins.lsp.mason"),
   require("plugins.lsp.lspconfig"),
