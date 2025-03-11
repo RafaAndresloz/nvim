@@ -1,14 +1,15 @@
 return {
   "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+
   config = function()
     local lspconfig = require("lspconfig")
     local capabilities = require("cmp_nvim_lsp").default_capabilities() -- Habilita capacidades de autocompletado
 
-    -- Función común para `on_attach`
-    local on_attach = function(client, bufnr)
+      -- Función común para `on_attach`
+      local on_attach = function(client, bufnr)
       -- Opciones comunes para los atajos
       local opts = { noremap = true, silent = true, buffer = bufnr }
-
       -- Define las teclas específicas del LSP
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
       vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -90,6 +91,20 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     })
+
+
+lspconfig.eslint.setup({
+  on_attach = function(client, bufnr)
+    -- Habilitar formateo automático
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-f>", "<cmd>lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
+    -- Correcciones automáticas al guardar
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
+
   end,
 }
 
