@@ -4,8 +4,9 @@ return {
 	require("plugins.lsp.lspconfig"),
 	require("plugins.lsp.cmp"),
 	require("plugins.lsp.snippets"),
-
+  require("plugins.lsp.lintern"),
 	-- PLUGINS CONFIGURATIONS
+	require("plugins.autotag"),
 	require("plugins.treesitter"),
 	require("plugins.telescope"),
 	require("plugins.nvim-tree"),
@@ -21,4 +22,8 @@ return {
 	require("plugins.dashboard_nvim"),
 	require("plugins.rainbow_nvim"),
 	require("plugins.colorscheme"),
+	require("plugins.trouble"),
+  require("plugins.colors"),
+  require("plugins.multicursor"),
+  require("plugins.bufdel"),
 }

@@ -21,6 +21,7 @@ return {
 					"bash",
 					"markdown",
 				},
+				auto_install = true, -- Instala parsers automáticamente si no están disponibles
 				sync_install = false, -- Instala parsers en segundo plano
 				highlight = {
 					enable = true, -- Activa resaltado de sintaxis

@@ -8,9 +8,18 @@ return {
 				view = {
 					width = 30, -- Anchura del panel
 					side = "left", -- Mostrar el árbol en el lado izquierdo
+					preserve_window_proportions = true,
+				},
+				actions = {
+					open_file = {
+						quit_on_open = false, -- No cerrar nvim-tree al abrir un archivo
+						window_picker = {
+							enable = false, -- Esto previene conflictos al abrir en splits
+						},
+					},
 				},
 				renderer = {
-					group_empty = true, -- Agrupar carpetas vacías
+					-- },
 					highlight_git = true, -- Resaltar cambios de Git
 					icons = {
 						show = {
@@ -19,14 +28,14 @@ return {
 							folder_arrow = true,
 							git = true,
 						},
-						git = {
-							unstaged = "✗",
-							staged = "✓",
-							untracked = "★",
-							renamed = "➜",
-							deleted = "",
-							ignored = "◌",
-						},
+						-- git = {
+						-- 	unstaged = "✗",
+						-- 	staged = "✓",
+						-- 	untracked = "★",
+						-- 	renamed = "➜",
+						-- 	deleted = "",
+						-- 	ignored = "◌",
+						-- },
 					},
 				},
 				filters = {
@@ -42,6 +51,7 @@ return {
 					vim.keymap.set("n", "r", api.fs.rename, opts) -- Renombrar archivo
 					vim.keymap.set("n", "d", api.fs.remove, opts) -- Eliminar archivo
 					vim.keymap.set("n", "<CR>", api.node.open.edit, opts) -- Abrir archivo o carpeta
+					vim.keymap.set("n", "c", api.fs.create, opts)
 				end,
 			})
 		end,

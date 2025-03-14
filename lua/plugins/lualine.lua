@@ -5,7 +5,7 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "gruvbox", -- Cambia esto por el tema de tu elección
+          theme = "dracula", -- Cambia esto por el tema de tu elección
           section_separators = '', -- Quita los separadores
           component_separators = '', -- Sin separadores de componentes
         },

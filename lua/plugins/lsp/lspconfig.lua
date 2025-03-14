@@ -1,110 +1,123 @@
-return {
-  "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-
-  config = function()
-    local lspconfig = require("lspconfig")
-    local capabilities = require("cmp_nvim_lsp").default_capabilities() -- Habilita capacidades de autocompletado
-
-      -- Función común para `on_attach`
-      local on_attach = function(client, bufnr)
-      -- Opciones comunes para los atajos
-      local opts = { noremap = true, silent = true, buffer = bufnr }
-      -- Define las teclas específicas del LSP
-      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-      vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-      vim.keymap.set('n', '<leader>dl', vim.diagnostic.open_float, opts)
-    end
-
-    -- CSS
-    lspconfig.cssls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- HTML
-    lspconfig.html.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- PHP (Intelephense)
-    lspconfig.intelephense.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- Java (jdtls)
-    lspconfig.jdtls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- Lua
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" }, -- Indica que `vim` es una global reconocida por el servidor LSP
-          },
-          workspace = {
-            library = vim.api.nvim_get_runtime_file("", true), -- Carga bibliotecas del runtime de Neovim
-            checkThirdParty = false, -- Opcional: evita advertencias de plugins externos
-          },
-          telemetry = {
-            enable = false, -- Desactiva la telemetría
-          },
-        },
-      },
-    })
-
-    -- Python
-    lspconfig.pyright.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        python = {
-          analysis = {
-            typeCheckingMode = "strict",
-          },
-        },
-      },
-    })
-
-    -- TailwindCSS
-    lspconfig.tailwindcss.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    -- TypeScript/JavaScript
-    lspconfig.ts_ls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-
-lspconfig.eslint.setup({
-  on_attach = function(client, bufnr)
-    -- Habilitar formateo automático
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-f>", "<cmd>lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
-    -- Correcciones automáticas al guardar
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
-})
-
-  end,
-}
-
+  return {
+  	"neovim/nvim-lspconfig",
+  	event = { "BufReadPre", "BufNewFile" },
+ 
+  	config = function()
+  		local lspconfig = require("lspconfig")
+  		local capabilities = require("cmp_nvim_lsp").default_capabilities() -- Habilita capacidades de autocompletado
+ 
+  		-- Función común para `on_attach`
+  		local on_attach = function(client, bufnr)
+  			-- Opciones comunes para los atajos
+  			local opts = { noremap = true, silent = true, buffer = bufnr }
+  			-- Define las teclas específicas del LSP
+  			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+  			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+  			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+  			vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, opts)
+  		end
+ 
+  		-- CSS
+  		lspconfig.cssls.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  		})
+ 
+  		-- HTML
+  		lspconfig.html.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  		})
+ 
+  		-- PHP (Intelephense)
+  		lspconfig.intelephense.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  		})
+ 
+  		-- Java (jdtls)
+  		lspconfig.jdtls.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  		})
+ 
+  		-- Lua
+  		lspconfig.lua_ls.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  			settings = {
+  				Lua = {
+  					diagnostics = {
+  						globals = { "vim" }, -- Indica que `vim` es una global reconocida por el servidor LSP
+  					},
+  					workspace = {
+  						library = vim.api.nvim_get_runtime_file("", true), -- Carga bibliotecas del runtime de Neovim
+  						checkThirdParty = false, -- Opcional: evita advertencias de plugins externos
+  					},
+  					telemetry = {
+  						enable = false, -- Desactiva la telemetría
+  					},
+  				},
+  			},
+  		})
+ 
+  		-- Python
+  		lspconfig.pyright.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  			settings = {
+  				python = {
+  					analysis = {
+  						typeCheckingMode = "strict",
+  					},
+  				},
+  			},
+  		})
+ 
+  		-- TailwindCSS
+  		lspconfig.tailwindcss.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  		})
+ 
+  		-- TypeScript/JavaScript
+  		lspconfig.ts_ls.setup({ -- Cambié `ts_ls` por `tsserver`
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  			filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact", "tsx" },
+  			cmd = { "typescript-language-server", "--stdio" },
+  		})
+ 
+  		-- Emmet
+  		lspconfig.emmet_ls.setup({
+  			capabilities = capabilities,
+  			on_attach = on_attach,
+  			filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact" }, -- Verifica compatibilidad con `tsx`
+  		})
+ 
+  		-- ESLint
+  		lspconfig.eslint.setup({
+  			on_attach = function(client, bufnr)
+  				vim.keymap.set(
+  					"n",
+  					"<C-f>",
+  					function()
+  						vim.lsp.buf.format({ async = true })
+  					end, -- Corrección de formato
+  					{ noremap = true, silent = true, buffer = bufnr }
+  				)
+  				vim.api.nvim_create_autocmd("BufWritePre", {
+  					buffer = bufnr,
+  					command = "EslintFixAll",
+  				})
+  			end,
+  			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "tsx" },
+  		})
+  	end,
+  }

@@ -3,8 +3,7 @@ vim.g.mapleader = " " -- Configura la tecla líder como "Espacio"
 
 local opts = { noremap = true, silent = true }
 
--- Salir de modo insertar
-vim.keymap.set("i", "<C-e>", "<Esc>", opts)
+
 
 -- Explorador de Archivos (nvim-tree)
 vim.keymap.set(
@@ -82,7 +81,13 @@ vim.keymap.set("n", "<leader>qo", ":copen<CR>", { desc = "Abrir Quickfix" })
 vim.keymap.set("n", "<leader>qc", ":cclose<CR>", { desc = "Cerrar Quickfix" })
 
 -- Guardar y Salir
-vim.keymap.set("n", "<C-s>", ":w<CR>", opts) -- Guardar archivo
+vim.api.nvim_set_keymap("i", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true }) -- Insert Mode
+vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) -- Normal Mode
+vim.api.nvim_set_keymap("v", "<C-s>", "<Esc>:w<CR>", { noremap = true, silent = true }) -- Visual Mode
+vim.api.nvim_set_keymap("t", "<C-s>", "<C-\\><C-n>:w<CR>", { noremap = true, silent = true }) -- Terminal Mode
+
+-- Mapear jj para salir del modo insertar sin escribir nada
+vim.api.nvim_set_keymap("i", "jj", "<Esc>l", { noremap = true, silent = true })
 --vim.keymap.set("n", "<C-q>", ":qa!<CR>", { noremap = true, silent = true, desc = "Guardar y salir forzando" })
 vim.api.nvim_set_keymap("n", "<C-q>", ":Bdelete<CR>", { noremap = true, silent = true })
 
@@ -92,6 +97,8 @@ vim.keymap.set("n", "<leader>gg", function()
 	local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 	lazygit:toggle()
 end, { desc = "Abrir Lazygit en terminal flotante" })
+
+vim.api.nvim_set_keymap("n", "$", ":!", { noremap = true, silent = false })
 
 -- Salir del modo TERMINAL con Esc
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true, desc = "Salir del modo Terminal" })

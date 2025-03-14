@@ -39,6 +39,7 @@ opt.swapfile = false
 -- Tiempo de espera para mapeos
 opt.timeoutlen = 500
 
+
 -- -- -- Configuración para íconos con colores
 -- -- require("nvim-web-devicons").setup({
 -- -- 	override = {},
