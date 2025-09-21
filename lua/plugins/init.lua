@@ -1,20 +1,29 @@
 return {
--- PLUGINS CONFIGURATIONS
-  require("plugins.treesitter"),
-  require("plugins.telescope"),
-  require("plugins.nvim-tree"),
-  require("plugins.which-key"),
-  require("plugins.comment-vim"),
-  require("plugins.nvim-autopairs"),
-  require("plugins.vim-surround"),
-  require("plugins.toggleterm"),
-  require("plugins.bufferline"),
-  require("plugins.lualine"),
-  require("plugins.vim_multicursor"),
-  require("plugins.dashboard_nvim"),
-  -- LSP CONFIGS
-  require("plugins.lsp.mason"),
-  require("plugins.lsp.lspconfig"),
-  require("plugins.lsp.cmp"),
-  require("plugins.lsp.snippets"),
+  {
+    "stevearc/conform.nvim",
+    -- event = 'BufWritePre', -- uncomment for format on save
+    opts = require "configs.conform",
+  },
+
+  -- These are some examples, uncomment them if you want to see them work!
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "configs.lspconfig"
+    end,
+  },
+
+  -- test new blink
+  -- { import = "nvchad.blink.lazyspec" },
+
+  -- {
+  -- 	"nvim-treesitter/nvim-treesitter",
+  -- 	opts = {
+  -- 		ensure_installed = {
+  -- 			"vim", "lua", "vimdoc",
+  --      "html", "css"
+  -- 		},
+  -- 	},
+  -- },
 }
+
